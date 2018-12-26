@@ -45,6 +45,11 @@ public class User {
     @NotEmpty
     private Date updatedDate;
 
+    @Column(name = "active")
+    @NotNull
+    @NotEmpty
+    private boolean active;
+
     @ManyToMany
     @JoinTable(name = "user_permission",
             joinColumns = @JoinColumn(name = "id_user"),
@@ -52,10 +57,17 @@ public class User {
     )
     private Set<Permission> permissions = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_role")
+    )
+    private Set<Role> roles = new HashSet<>();
+
     public User() {
     }
 
-    public User(String id, String name, String username, String password, String createdBy, Date createdDate, String updatedBy, Date updatedDate) {
+    public User(String id, String name, String username, String password, String createdBy, Date createdDate, String updatedBy, Date updatedDate, boolean active, Set<Permission> permissions, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -64,6 +76,9 @@ public class User {
         this.createdDate = createdDate;
         this.updatedBy = updatedBy;
         this.updatedDate = updatedDate;
+        this.active = active;
+        this.permissions = permissions;
+        this.roles = roles;
     }
 
     public String getId() {
@@ -130,6 +145,30 @@ public class User {
         this.updatedDate = updatedDate;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Set<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -138,9 +177,12 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", createdBy='" + createdBy + '\'' +
-                ", createdDate='" + createdDate + '\'' +
+                ", createdDate=" + createdDate +
                 ", updatedBy='" + updatedBy + '\'' +
-                ", updatedDate='" + updatedDate + '\'' +
+                ", updatedDate=" + updatedDate +
+                ", active=" + active +
+                ", permissions=" + permissions +
+                ", roles=" + roles +
                 '}';
     }
 }
