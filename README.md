@@ -76,3 +76,8 @@ VALUES ('dcfbe216-cd5a-42a3-b28f-9d5de543e6a5','4a4f9360-0113-11e9-8eb2-f2801f1b
 	    ('4619ce28-6941-4377-9f01-749dfe4314cc','4a4f9360-0113-11e9-8eb2-f2801f1b9fd1','8df09f77-c18f-4d86-b2b3-b607de92e009'),
 	    ('6dbaf324-9e7c-4d90-ac3b-d24711daa791','4a4f95f4-0113-11e9-8eb2-f2801f1b9fd1','fd40ede7-05e9-4f9b-858a-6c4724ecdff2'),
 	    ('7ff1b0a2-4768-4387-9598-af8c7ff34ecb','4a4f975c-0113-11e9-8eb2-f2801f1b9fd1','8df09f77-c18f-4d86-b2b3-b607de92e009');
+
+untuk akses token: localhost:10001/oauth/token?grant_type=password&username=admin1&password=admin
+dengan basic auth: username = client_id dan password = client_secret
+
+jangan lupa, di custom user detail, return kan get password, agar tidak invalid_grant bad_credentials
